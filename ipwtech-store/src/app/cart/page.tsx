@@ -200,7 +200,7 @@ export default function CartPage() {
 
                     {/* IMAGE */}
                     <img
-                    src={`http://localhost:3000/${item.product.image}`}
+                    src={`https://ipwtech-backend.onrender.com/${item.product.image}`}
                     className="w-20 h-20 object-contain"
                     />
 

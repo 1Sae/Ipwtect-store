@@ -175,7 +175,7 @@ export default function WishlistProductCard({ product }: Props) {
                 className="min-w-full flex items-center justify-center"
                 >
                 <img
-                    src={`http://localhost:3000/${img}`}
+                    src={`https://ipwtech-backend.onrender.com/${img}`}
                     className="max-h-full object-contain"
                 />
                 </div>

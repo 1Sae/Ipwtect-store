@@ -178,7 +178,7 @@ export default function Navbar() {
                       }}
                     >
                       <img
-                        src={`http://localhost:3000${cat.image}`}
+                        src={`https://ipwtech-backend.onrender.com${cat.image}`}
                         className="w-30 h-30 object-contain"
                       />
 

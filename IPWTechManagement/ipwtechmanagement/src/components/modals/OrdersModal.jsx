@@ -12,7 +12,7 @@ import {
     LuBookText,
 } from "react-icons/lu";
 
-const API_BASE = "http://localhost:3000";
+const API_BASE = "https://ipwtech-backend.onrender.com";
 
 const STATUS_CONFIG = {
     Pending: {

@@ -122,7 +122,7 @@ export default function ProductCard({ product }: Props) {
                 "
             >
                 <img
-                src={`http://localhost:3000/${img}`}
+                src={`https://ipwtech-backend.onrender.com/${img}`}
                 alt={product.name}
                 className="
                     max-h-full

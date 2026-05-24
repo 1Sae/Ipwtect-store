@@ -127,7 +127,7 @@ function OrderCard({ order, index, cancelOneOrder, cancellingId }: { order: any 
                 className="flex items-center gap-4 border-b border-white/5 pb-3"
                 >
                 <img
-                    src={`http://localhost:3000/${item.product.image}`}
+                    src={`https://ipwtech-backend.onrender.com/${item.product.image}`}
                     className="w-16 h-16 object-contain bg-black/20 rounded-lg"
                 />
     

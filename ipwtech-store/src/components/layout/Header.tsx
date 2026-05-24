@@ -349,7 +349,7 @@ export default function Header() {
 
                       <div className="relative z-10 w-24 h-24 flex items-center justify-center max-[1300px]:w-20 max-[1300px]:h-20 max-h-[1090px]:w-20 max-h-[1090px]:h-20">
                         <img
-                          src={`http://localhost:3000${cat.image}`}
+                          src={`https://ipwtech-backend.onrender.com${cat.image}`}
                           alt={cat.name}
                           className="
                             max-w-full
@@ -448,7 +448,7 @@ export default function Header() {
                     className="flex items-center gap-3 p-3 hover:bg-white/5 cursor-pointer"
                   >
                     <img
-                      src={`http://localhost:3000/${item.image}`}
+                      src={`https://ipwtech-backend.onrender.com/${item.image}`}
                       className="w-10 h-10 object-contain"
                     />
 
@@ -764,7 +764,7 @@ export default function Header() {
 
                       <div className="relative z-10 w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center">
                         <img
-                          src={`http://localhost:3000${cat.image}`}
+                          src={`https://ipwtech-backend.onrender.com${cat.image}`}
                           alt={cat.name}
                           className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
                         />

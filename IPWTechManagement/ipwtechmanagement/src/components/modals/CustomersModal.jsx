@@ -8,7 +8,7 @@ import CancelButton from "../../constants/CancelButton";
 import IconButton from "../../constants/IconButton";
 import Section from "../Section";
 
-const API_BASE = "http://localhost:3000";
+const API_BASE = "https://ipwtech-backend.onrender.com";
 
 export default function CustomersModal({ open, userId, onClose }) {
   const t = useTheme();

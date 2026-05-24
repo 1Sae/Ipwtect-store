@@ -64,7 +64,7 @@ export default function ProductImagesGallery({ images }: Props) {
                 className="min-w-full h-full flex items-center justify-center"
               >
                 <img
-                  src={`http://localhost:3000/${img}`}
+                  src={`https://ipwtech-backend.onrender.com/${img}`}
                   className="max-h-full object-contain transition-transform duration-500 hover:scale-105"
                 />
               </div>
@@ -110,7 +110,7 @@ export default function ProductImagesGallery({ images }: Props) {
         {productImages.map((img, i) => (
           <img
             key={i}
-            src={`http://localhost:3000/${img}`}
+            src={`https://ipwtech-backend.onrender.com/${img}`}
             onClick={() => setCurrent(i)}
             className={`
               w-20 h-20 object-contain rounded-lg cursor-pointer border transition

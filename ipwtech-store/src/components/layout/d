@@ -1,0 +1,362 @@
+"use client";
+
+import { useState, useRef, useEffect, use } from "react";
+import Link from "next/link";
+import {
+  FiChevronLeft,
+  FiChevronRight,
+  FiSearch,
+  FiUser,
+  FiShoppingCart,
+  FiX,
+  FiMenu,
+} from "react-icons/fi";
+import { getCategories } from "@/src/services/categoryService";
+import { Category } from "@/src/types/category";
+import { useTheme } from "@/src/theme/ThemeProvider";
+
+export default function Header() {
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [hoveredMenu, setHoveredMenu] = useState(false);
+  //const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+  const closeTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const data = await getCategories();
+        setCategories(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCategories();
+  }, []);
+
+  //const scrollCategories = (dir: "left" | "right") => {
+    scrollRef.current?.scrollBy({
+      left: dir === "left" ? -250 : 250,
+      behavior: "smooth",
+    });
+  };
+  const handleMouseEnter = () => {
+    if (closeTimeout.current) {
+      clearTimeout(closeTimeout.current);
+    }
+    setHoveredMenu(true);
+  };
+  
+  const handleMouseLeave = () => {
+    closeTimeout.current = setTimeout(() => {
+      setHoveredMenu(false);
+    }, 200);
+  };
+
+  const t = useTheme();
+  return (
+    <header className="w-full bg-[#111827] text-white relative">
+
+      <div className="max-w-[1300px] mx-auto px-4 py-4 flex items-center gap-6">
+
+        {/* ================= Left Side ================= */}
+        <div
+          className="flex items-center gap-3 relative"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          {/* Menu Icon */}
+          <FiMenu className="text-xl cursor-pointer hover:text-orange-500 transition-colors hidden lg:block" />
+          {/* Logo */}
+          <Link href="/" className="text-2xl font-bold">
+            <span className="text-orange-500">IPW </span>Tech
+          </Link>
+
+          {/* ================= Mega Menu ================= */}
+          {hoveredMenu && !loading && (
+          <div
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            className="
+              absolute
+              top-full
+              left-0
+              mt-6
+              w-[1150px]
+              h-[580px]
+              rounded-3xl
+              overflow-hidden
+              z-50
+              flex
+              animate-fadeIn
+              border
+            "
+            style={{
+              background: "linear-gradient(135deg, #f8fafc, #ffffff)",
+              borderColor: "#e2e8f0",
+            }}
+          >
+
+            {/* ================= LEFT FEATURE PANEL ================= */}
+            <div
+              className="
+                w-[320px]
+                relative
+                p-8
+                flex
+                flex-col
+                justify-between
+                text-white
+                overflow-hidden
+              "
+              style={{
+                background:
+                  "linear-gradient(160deg, #111827, #1f2937)",
+              }}
+            >
+              {/* Glow effect */}
+              <div
+                className="
+                  absolute
+                  -top-20
+                  -right-20
+                  w-60
+                  h-60
+                  rounded-full
+                  opacity-30
+                  blur-3xl
+                "
+                style={{ background: t.colors.primary }}
+              />
+
+              <div className="relative z-10">
+                <h2 className="text-2xl font-bold leading-tight">
+                  Discover <br />
+                  <span className="text-orange-500">
+                    Innovation
+                  </span>
+                </h2>
+
+                <p className="text-sm mt-4 text-gray-300">
+                  Browse our premium tech collections
+                  and discover top-tier devices and
+                  accessories.
+                </p>
+              </div>
+
+              <Link href="/shop"
+                className="
+                relative
+                z-10
+                bg-orange-500
+                hover:bg-orange-600
+                text-sm
+                px-5
+                py-2.5
+                rounded-full
+                transition-colors
+                cursor-pointer
+                text-white
+                font-semibold
+                flex
+                items-center
+                "
+                >
+                  Explore All Products Catalogue
+              </Link>
+              
+            </div>
+
+
+
+            {/* ================= RIGHT GRID ================= */}
+          <div
+            className="
+              flex-1
+              relative
+              overflow-hidden
+              rounded-r-3xl
+            "
+            style={{
+              background:
+                "linear-gradient(160deg, #111827, #1f2937)",
+            }}
+          >
+
+              <div
+                className="
+                  absolute
+                  -top-20
+                  -left-20
+                  w-60
+                  h-60
+                  rounded-full
+                  opacity-30
+                  blur-3xl
+                "
+                style={{ background: "#ff6a00" }}
+              />  
+
+            {/* Scrollable Area */}
+            <div
+              className="
+                h-full
+                overflow-y-auto
+                px-10
+                py-10
+                pr-6
+                grid
+                grid-cols-2
+                md:grid-cols-3
+                lg:grid-cols-3
+                xl:grid-cols-4
+                gap-8
+                scrollbar-thin
+              "
+            >
+
+              {categories.map((cat) => (
+                <Link
+                  key={cat._id}
+                  href={`/shop?category=${cat._id}`}
+                  className="
+                    group
+                    relative
+                    h-[200px]
+                    rounded-3xl
+                    bg-[#0f172a]
+                    border border-white/10
+                    flex
+                    flex-col
+                    items-center
+                    justify-center
+                    transition-all
+                    duration-500
+                    hover:-translate-y-2
+                    hover:border-orange-500
+                    hover:shadow-[0_20px_40px_rgba(255,106,0,0.25)]
+                  "
+                >
+
+                  {/* Glow Background */}
+                  <div
+                    className="
+                      absolute
+                      inset-0
+                      rounded-3xl
+                      opacity-0
+                      group-hover:opacity-100
+                      transition-opacity
+                      duration-500
+                    "
+                    style={{
+                      background:
+                        "radial-gradient(circle at center, rgba(255,106,0,0.18), transparent 70%)",
+                    }}
+                  />
+
+                  {/* Image */}
+                  <div className="relative z-10 w-24 h-24 flex items-center justify-center">
+                    <img
+                      src={`http://localhost:3000${cat.image}`}
+                      alt={cat.name}
+                      className="
+                        max-w-full
+                        max-h-full
+                        object-contain
+                        transition-transform
+                        duration-500
+                        group-hover:scale-110
+                      "
+                    />
+                  </div>
+
+                  {/* Name */}
+                  <span
+                    className="
+                      relative
+                      z-10
+                      mt-4
+                      text-sm
+                      font-semibold
+                      text-gray-200
+                      group-hover:text-orange-500
+                      transition-colors
+                      duration-300
+                    "
+                  >
+                    {cat.name}
+                  </span>
+
+                </Link>
+              ))}
+
+            </div>
+          </div>
+
+          </div>
+        )}
+        </div>
+
+        {/* ================= Middle Section ================= */}
+        <div className="flex-1 relative h-[40px] flex items-center overflow-hidden">
+
+          {/* Search Bar */}
+          <div
+            className={`
+              absolute left-0 right-0 flex items-center
+              transition-all duration-300 ease-in-out
+              ${
+                searchOpen
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-3 pointer-events-none"
+              }
+            `}
+          >
+            <div className="relative w-full">
+              <input
+                type="text"
+                autoFocus
+                placeholder="Search products..."
+                className="
+                  w-full bg-[#1F2937] border border-gray-700
+                  rounded-full py-2 pl-5 pr-12 text-sm
+                  focus:outline-none
+                  transition-colors
+                "
+              />
+              <FiX
+                onClick={() => setSearchOpen(false)}
+                className="
+                  absolute right-4 top-1/2 -translate-y-1/2
+                  cursor-pointer text-gray-400
+                  hover:text-orange-500 transition
+                "
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* ================= Icons ================= */}
+        <div className="flex items-center gap-6 text-lg">
+          <FiSearch
+            onClick={() => setSearchOpen(true)}
+            className="cursor-pointer hover:text-orange-500 transition-colors"
+          />
+          <FiUser className="cursor-pointer hover:text-orange-500 transition-colors" />
+          <div className="relative cursor-pointer">
+            <FiShoppingCart className="hover:text-orange-500 transition-colors" />
+            <span className="absolute -top-2 -right-2 bg-orange-500 text-xs w-5 h-5 flex items-center justify-center rounded-full">
+              3
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </header>
+  );
+//}

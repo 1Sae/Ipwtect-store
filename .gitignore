@@ -1,0 +1,29 @@
+# dependencies
+node_modules/
+
+# env files
+.env
+.env.local
+.env.production
+
+# next
+.next/
+
+# build
+dist/
+build/
+
+# logs
+npm-debug.log*
+
+# mac
+.DS_Store
+
+# vscode
+.vscode/
+
+# generated
+coverage/
+
+# lock optional
+package-lock.json

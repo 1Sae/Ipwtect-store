@@ -1,5 +1,5 @@
 export const API = {
-    BASE_URL: "http://localhost:3000/api",
+    BASE_URL: "https://ipwtech-backend.onrender.com/api",
 
     AUTH: {
         LOGIN: "/user/auth/login",
